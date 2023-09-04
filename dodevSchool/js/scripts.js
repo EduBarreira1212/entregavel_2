@@ -1,34 +1,62 @@
-////////////////////////////////////////////////////////////////////////
-////////////////// FAÇA O SEU CÓDIGO AQUI \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-////////////////////////////////////////////////////////////////////////
-
 class Aluno {
-  
+  constructor(name, age, grade){
+    this.Nome = name;
+    this.Idade = age;
+    this.Nota = grade;
+  }
 }
 
-// Array
+let arrayAlunos = [];
 
 
 //funções projeto
 
-function CadastrarAluno() {
-  
+function CadastrarAluno(name, age, grade) {
+  let student =  new Aluno(name, age, grade);
+  arrayAlunos.push(student);
+  return student;
 }
 
-function OrdenarPorNota() {
- 
+function OrdenarPorNota(students) {
+ arrayAlunos.sort((a, b) => {
+  a.Nota - b.Nota
+ });
+ return students
 }
 
-function OrdenarPorIdade() {
-
+function OrdenarPorIdade(students) {
+  students.sort((a, b) => {
+    b.Idade - a.Idade
+   });
+   return students
 }
 
-function OrdenarPorNome() {
+function OrdenarPorNome(students) {
+  students.sort((a, b) => {
+    const nomeA = a.Nome.toUpperCase();
+    const nomeB = b.Nome.toUpperCase();
 
+    if(nomeA < nomeB){
+      return -1;
+    }
+    if(nomeA > nomeB){
+      return 1
+    }
+    return 0;
+  })
+  return students;
 }
 
-function CalcularMedia(){
-
+function CalcularMedia(students){
+  if(students.length === 0){
+    return 0;
+  }
+  let sum = 0;
+  for (const student of students) {
+    sum += Number(student.Nota);
+  }
+  let average = Number(sum / students.length);
+  return average;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -104,7 +132,7 @@ const saveAluno = (nome, idade, nota, done = 0, save = 1) => {
   
 
   const media = document.querySelector("#media");
-  media.textContent = CalcularMedia(arrayAlunos).toFixed(2)
+  media.textContent = CalcularMedia(arrayAlunos).toFixed(2);
 
   alunoInput.value = "";
   alunoInput2.value = "";
